@@ -19,6 +19,7 @@ class ReceiverProcess(Process):
 
     async def asyncio_sessions(self):
         async with ClientSession() as session:
+            # You can change self.task_queue.qsize() to True, if you want to run it forever
             while self.task_queue.qsize():
                 task = self.task_queue.get()
                 resp = await self.post(session, task)
